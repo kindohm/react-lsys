@@ -1,1 +1,1 @@
-export const updateRules = rules => ({ type: "UPDATE_RULES", payload: rules });
+export const updateLSystem = lsystem => ({ type: "UPDATE_LSYSTEM", payload: lsystem });

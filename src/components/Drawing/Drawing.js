@@ -4,19 +4,19 @@ import { connect } from "react-redux";
 import { run } from './../../services/lsystem';
 
 const mapStateToProps = state => {
-    return { rules: state.rules };
+    return { lsystem: state.lsystem };
 };
 
 class ConnectedDrawing extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
-        run(nextProps.rules);
+        run(nextProps.lsystem);
         return false;
     }
 
     render() {
         return (<div className="drawing">
-            <canvas id="canvas" height="200" width="400"></canvas>
+            <canvas id="canvas" width="800" height="400"></canvas>
         </div>)
     }
 }

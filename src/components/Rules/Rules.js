@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './Rules.css';
 import { connect } from "react-redux";
-import { updateRules } from "./../../actions/index";
+import { updateLSystem } from "./../../actions/index";
 
 const mapDispatchToProps = dispatch => {
     return {
-        updateRules: rules => dispatch(updateRules(rules))
+        updateLSystem: lsystem => dispatch(updateLSystem(lsystem))
     };
 };
 
@@ -18,8 +18,9 @@ class ConnectedRules extends Component {
             angle: 15,
             iterations: 3,
             axiom: "M-N-",
-            rule1: "M=M++NM",
-            rule2: "N=---M"
+            rules: [
+                { id: "rule1", value: "M=M++NM", label: "Rule 1" },
+                { id: "rule2", value: "N=---M", label: "Rule 2" }]
         };
 
         this.drawClick = this.drawClick.bind(this);
@@ -27,14 +28,35 @@ class ConnectedRules extends Component {
     }
 
     drawClick() {
-        this.props.updateRules(this.state);
+        this.props.updateLSystem(this.state);
     }
 
     handleChange(event) {
+        if (event.target.id.indexOf('rule') === 0) {
+            let clonedRules = this.state.rules.slice();
+
+            const index = clonedRules.findIndex(rule => {
+                return rule.id === event.target.id;
+            });
+
+            clonedRules[index].value = event.target.value;
+
+            this.setState({rules: clonedRules});
+            return;
+        }
+
         this.setState({ [event.target.id]: event.target.value });
     }
 
     render() {
+
+
+        const ruleParts = this.state.rules.map(rule => {
+            return <p key={rule.id}><label>{rule.label}</label><br />
+                <input id={rule.id} type="text" onChange={this.handleChange} value={rule.value} />
+            </p>;
+        });
+
         return (
             <div className="rules">
                 <p><label>Angle:</label><br />
@@ -46,12 +68,13 @@ class ConnectedRules extends Component {
                 <p><label>Axiom:</label><br />
                     <input onChange={this.handleChange} id="axiom" type="text" value={this.state.axiom} />
                 </p>
-                <p><label>Rule 1:</label><br />
+                {/* <p><label>Rule 1:</label><br />
                     <input onChange={this.handleChange} id="rule1" type="text" value={this.state.rule1} />
                 </p>
                 <p><label>Rule 2:</label><br />
                     <input onChange={this.handleChange} id="rule2" type="text" value={this.state.rule2} />
-                </p>
+                </p> */}
+                {ruleParts}
                 <p><button onClick={this.drawClick}>Draw</button></p>
             </div>
         );

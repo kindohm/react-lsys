@@ -1,14 +1,14 @@
 const BGCOLOR = '#000000';
 const FORECOLOR = '#cccccc';
-const WIDTH = 400;
-const HEIGHT = 200;
+const WIDTH = 800;
+const HEIGHT = 400;
 const ANTICLOCK = '+';
 const CLOCKWISE = '-';
 const PUSH = '[';
 const POP = ']';
 const COLOUR = 'C';
 const RAD = Math.PI / 180.0;
-const LINEWIDTH = 4;
+const LINEWIDTH = 2;
 
 const TurtleRenderer = function (width, height) {
     if (width !== undefined && width !== null) {
@@ -569,19 +569,20 @@ StringBuffer.prototype.toString = function toString() {
     return this.buffer.join("");
 };
 
-const run = (rules) => {
+const run = (options) => {
 
     try {
         const lsys = new LSystemsProcessor();
-        lsys.iterations = rules.iterations;
-        lsys.axiom = rules.axiom;
-        lsys.addRule(rules.rule1);
-        lsys.addRule(rules.rule2);
+        lsys.iterations = options.iterations;
+        lsys.axiom = options.axiom;
+        for (let i = 0; i < options.rules.length; i++){
+            lsys.addRule(options.rules[i].value);
+        }
 
         const commands = lsys.generate();
 
         const renderer = new TurtleRenderer(WIDTH, HEIGHT);
-        renderer.setAngle(rules.angle);
+        renderer.setAngle(options.angle);
         renderer.setConstants('');
         renderer.setRenderLineWidths(false);
         renderer.process(commands, false);
@@ -613,7 +614,7 @@ const run = (rules) => {
 
         // reprocess...
         renderer.setOffsets(xoffset, yoffset);
-        renderer.setAngle(rules.angle);
+        renderer.setAngle(options.angle);
         renderer.setDistance(newDistance);
         renderer.process(commands, true);
 
