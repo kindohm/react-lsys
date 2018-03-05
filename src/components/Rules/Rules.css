@@ -1,0 +1,9 @@
+div.rules{
+    text-align: left;
+    width: 50%;
+    margin: auto;
+}
+
+div.rules p {
+    text-align: left;
+}

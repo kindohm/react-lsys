@@ -1,0 +1,1 @@
+export const updateRules = rules => ({ type: "UPDATE_RULES", payload: rules });
