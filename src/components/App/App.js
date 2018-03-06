@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Rules from './../Rules/Rules';
+import LSystemForm from './../LSystemForm/LSystemForm';
 import Drawing from './../Drawing/Drawing';
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <div className="App-intro">
-          <Rules></Rules>
+          <LSystemForm></LSystemForm>
           <Drawing></Drawing>
         </div>
       </div>

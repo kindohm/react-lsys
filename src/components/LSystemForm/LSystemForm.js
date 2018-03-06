@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Rules.css';
+import './LSystemForm.css';
 import { connect } from "react-redux";
 import { updateLSystem } from "./../../actions/index";
 
@@ -9,7 +9,7 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-class ConnectedRules extends Component {
+class ConnectedLSystemForm extends Component {
 
     constructor() {
         super();
@@ -50,7 +50,6 @@ class ConnectedRules extends Component {
 
     render() {
 
-
         const ruleParts = this.state.rules.map(rule => {
             return <p key={rule.id}><label>{rule.label}</label><br />
                 <input id={rule.id} type="text" onChange={this.handleChange} value={rule.value} />
@@ -68,12 +67,6 @@ class ConnectedRules extends Component {
                 <p><label>Axiom:</label><br />
                     <input onChange={this.handleChange} id="axiom" type="text" value={this.state.axiom} />
                 </p>
-                {/* <p><label>Rule 1:</label><br />
-                    <input onChange={this.handleChange} id="rule1" type="text" value={this.state.rule1} />
-                </p>
-                <p><label>Rule 2:</label><br />
-                    <input onChange={this.handleChange} id="rule2" type="text" value={this.state.rule2} />
-                </p> */}
                 {ruleParts}
                 <p><button onClick={this.drawClick}>Draw</button></p>
             </div>
@@ -81,6 +74,6 @@ class ConnectedRules extends Component {
     }
 }
 
-const Rules = connect(null, mapDispatchToProps)(ConnectedRules);
+const LSystemForm = connect(null, mapDispatchToProps)(ConnectedLSystemForm);
 
-export default Rules;
+export default LSystemForm;
